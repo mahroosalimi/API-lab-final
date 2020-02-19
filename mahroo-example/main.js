@@ -1,25 +1,150 @@
-var elem = document.getElementById('draw-animation');
-var two = new Two({ width: 285, height: 200 }).appendTo(elem);
+var centerX = 740;
+var centerY = 380;
 
-var circle = two.makeCircle(-70, 0, 50);
-var rect = two.makeRectangle(70, 0, 100, 100);
-circle.fill = '#FF8000';
-rect.fill = 'rgba(0, 200, 255, 0.75)';
+var elem = document.getElementById("atoms");
 
-var group = two.makeGroup(circle, rect);
-group.translation.set(two.width / 2, two.height / 2);
-group.scale = 0;
-group.noStroke();
+var elementNames = [
+  "",
+  "Hydrogen",
+  "Helium",
+  "Lithium",
+  "Beryllium",
+  "Boron",
+  "Carbon",
+  "Nitrogen",
+  "Oxygen",
+  "Fluorine",
+  "Neon"
+];
 
-// Bind a function to scale and rotate the group
-// to the animation loop.
-two.bind('update', function(frameCount) {
-  // This code is called everytime two.update() is called.
-  // Effectively 60 times per second.
-  if (group.scale > 0.9999) {
-    group.scale = group.rotation = 0;
+var styles = {
+  alignment: "center",
+  size: 40,
+  family: "Roboto"
+};
+
+var nucleusCount = 10;
+var nucleusArray = Array();
+
+var electronCount = 10;
+var electronArray = Array();
+
+function intRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+var two = new Two({ fullscreen: true }).appendTo(elem);
+
+var protonColor = two.makeRadialGradient(
+  0,
+  0,
+  15,
+  new Two.Stop(0, "red", 1),
+  new Two.Stop(1, "black", 1)
+);
+
+var neutronColor = two.makeRadialGradient(
+  0,
+  0,
+  15,
+  new Two.Stop(0, "blue", 1),
+  new Two.Stop(1, "black", 1)
+);
+
+for (i = 0; i < nucleusCount; i++) {
+  nucleusArray.push(two.makeCircle(intRange(-10, 10), intRange(-10, 10), 8));
+}
+
+nucleusArray.forEach(function(nucleus, index) {
+  if (index % 2 == 0) {
+    nucleus.fill = protonColor;
   }
-  var t = (1 - group.scale) * 0.125;
-  group.scale += t;
-  group.rotation += t * 5 * Math.PI;
-}).play();  // Finally, start the animation loop
+  if (index % 2 == 1) {
+    nucleus.fill = neutronColor;
+  }
+  nucleus.noStroke();
+});
+
+for (var i = 0; i < 10; i++) {
+  if (i < 2) {
+    var shellRadius = 60;
+    var angle = i * Math.PI;
+    electronArray.push(
+      two.makeCircle(
+        Math.cos(angle) * shellRadius,
+        Math.sin(angle) * shellRadius,
+        5
+      )
+    );
+  }
+  if (i >= 2 && i < 10) {
+    var shellRadius = 100;
+    var angle = (i - 2) * Math.PI / 4;
+    electronArray.push(
+      two.makeCircle(
+        Math.cos(angle) * shellRadius,
+        Math.sin(angle) * shellRadius,
+        5
+      )
+    );
+  }
+}
+
+var orbitA = two.makeCircle(centerX, centerY, 50);
+orbitA.fill = "transparent";
+orbitA.linewidth = 3;
+orbitA.stroke = "rgba(0, 0, 0, 0.1)";
+
+var orbitB = two.makeCircle(centerX, centerY, 80);
+orbitB.fill = "transparent";
+orbitB.linewidth = 3;
+orbitB.stroke = "rgba(0, 0, 0, 0.1)";
+
+var groupElectronA = two.makeGroup(electronArray.slice(0, 2));
+groupElectronA.translation.set(centerX, centerY);
+groupElectronA.fill = "green";
+groupElectronA.linewidth = 2;
+
+var groupElectronB = two.makeGroup(electronArray.slice(2, 10));
+groupElectronB.translation.set(centerX, centerY);
+groupElectronB.fill = "red";
+groupElectronB.linewidth = 2;
+
+var groupNucleus = two.makeGroup(nucleusArray);
+groupNucleus.translation.set(centerX, centerY);
+
+two
+  .bind("update", function(frameCount) {
+    groupElectronA.rotation += 0.025 * Math.PI;
+    groupElectronB.rotation += 0.005 * Math.PI;
+    groupNucleus.rotation -= 0.08;
+  })
+  .play();
+
+var text = two.makeText("", centerX, 100, styles);
+
+nucleusArray.forEach(function(nucleus, index) {
+  nucleus.opacity = 0;
+});
+
+electronArray.forEach(function(electron, index) {
+  electron.opacity = 0;
+});
+
+visible = 0;
+
+document.addEventListener("click", function(event) {
+  if (visible < nucleusArray.length) {
+    nucleusArray[visible].opacity = 1;
+    electronArray[visible].opacity = 1;
+    visible++;
+    text.value = elementNames[visible];
+  }
+  else {
+    nucleusArray.forEach(el => el.opacity=0);
+    electronArray.forEach(el => el.opacity=0);
+    visible = 0;
+    text.value = elementNames[0];
+  }
+});         
+
