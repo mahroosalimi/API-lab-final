@@ -1,6 +1,5 @@
 body{
-    width: 100vw;
-    height: 100vh;
+    background-color: rgb(255, 80, 00);
 }
 #draw-shapes{
     width: 100vw;
