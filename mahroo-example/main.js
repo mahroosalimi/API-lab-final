@@ -67,7 +67,7 @@ nucleusArray.forEach(function(nucleus, index) {
 
 for (var i = 0; i < 10; i++) {
   if (i < 2) {
-    var shellRadius = 60;
+    var shellRadius = 20;
     var angle = i * Math.PI;
     electronArray.push(
       two.makeCircle(
