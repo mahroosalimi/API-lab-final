@@ -35,7 +35,7 @@
         renderer.domElement.style.left = 0;
 
         var shape = extractShape(jigsaw);
-
+        //Changing the geometry of the puzzle piece
         var geometry = new THREE.ExtrudeGeometry(shape, {
           depth: 20,
           curveSegments: 64,
@@ -179,13 +179,13 @@
           return shape;
 
         }
-
+        //Changing the shadow's shape 
         function generateShadow() {
 
           var vertices = [];
           for (var i = 0; i < 32; i++) {
             var pct = i / 32;
-            var theta = Math.PI * 2 * pct;
+            var theta = Math.PI * 13 * pct;
             var x = Math.cos(theta);
             var y = Math.sin(theta);
             vertices.push(new THREE.Vector2(x, y));
@@ -193,9 +193,9 @@
 
           var shadow = new THREE.Mesh(
             new THREE.ShapeGeometry(new THREE.Shape(vertices)),
-            new THREE.MeshBasicMaterial({ color: 0xefefef, transparent: true, side: THREE.DoubleSide })
+            new THREE.MeshBasicMaterial({ color: "black", transparent: true, side: THREE.DoubleSide })
           );
-
+          //Setting the shadow's colour to black
           shadow.scale.set(geometry.boundingBox.width / 2, geometry.boundingBox.height / 2, 1 / size);
           shadow.rotation.x = Math.PI / 2;
           shadow.position.y = - 30;
@@ -203,13 +203,13 @@
           return shadow;
 
         }
-
+        //Allowing you to rotate the shape more
         function mousemove(e) {
 
           var pct;
 
           pct = 2 * (e.clientX / width - 0.5);
-          mesh.rotation.destination.y = Math.PI / 2 * pct;
+          mesh.rotation.destination.y = Math.PI * 1.5 * pct;
 
           pct = e.clientY / height;
           camera.position.destination.y = pct * 50 - 15;
