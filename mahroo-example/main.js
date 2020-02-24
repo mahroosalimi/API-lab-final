@@ -67,37 +67,37 @@ nucleusArray.forEach(function(nucleus, index) {
 
 for (var i = 0; i < 10; i++) {
   if (i < 2) {
-    var shellRadius = 20;
+    var shellRadius = 40;
     var angle = i * Math.PI;
     electronArray.push(
       two.makeCircle(
         Math.cos(angle) * shellRadius,
         Math.sin(angle) * shellRadius,
-        5
+        6
       )
     );
   }
   if (i >= 2 && i < 10) {
     var shellRadius = 100;
-    var angle = (i - 2) * Math.PI / 4;
+    var angle = (i - 2) * Math.PI / 3;
     electronArray.push(
       two.makeCircle(
         Math.cos(angle) * shellRadius,
         Math.sin(angle) * shellRadius,
-        5
+        6
       )
     );
   }
 }
 
-var orbitA = two.makeCircle(centerX, centerY, 50);
+var orbitA = two.makeCircle(centerX, centerY, 40);
 orbitA.fill = "transparent";
-orbitA.linewidth = 3;
+orbitA.linewidth = 6;
 orbitA.stroke = "rgba(0, 0, 0, 0.1)";
 
-var orbitB = two.makeCircle(centerX, centerY, 80);
+var orbitB = two.makeCircle(centerX, centerY, 100);
 orbitB.fill = "transparent";
-orbitB.linewidth = 3;
+orbitB.linewidth = 6;
 orbitB.stroke = "rgba(0, 0, 0, 0.1)";
 
 var groupElectronA = two.makeGroup(electronArray.slice(0, 2));
