@@ -1,6 +1,6 @@
 // Make an instance of two and place it on the page.
 var elem = document.getElementById('draw-shapes');
-var params = { width: 500, height: 500 };
+var params = { width: 800, height: 800 };
 var two = new Two(params).appendTo(elem);
 let x;
 let y;
@@ -10,14 +10,14 @@ let counter = 0;
 
 //Return random X position
 function randPosX(){
-    x = Math.random() * 500;
+    x = Math.random() * 600;
     x = Math.floor(x);
     savePosX(x);
     return x;
 }
 //Returns random Y position
 function randPosY(){
-    y = Math.random() * 500;
+    y = Math.random() * 600;
     y = Math.floor(y);
     savePosY(y);
     return y;
