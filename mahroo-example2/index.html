@@ -17,7 +17,7 @@
         <script src="underscore.js"></script>
         <script>
             $(function () {
-
+                //The colors of the elements
                 var colors = [
                     'rgb(169, 169, 169)',
                     'rgb(64, 64, 64)',
@@ -31,14 +31,14 @@
                     fullscreen: true,
                     autostart: true
                 }).appendTo(document.body);
-
+                //Properties of the "visible" background
                 var background = two.makeRectangle(two.width / 2, two.height / 2, two.width, two.height);
                 background.noStroke();
                 background.fill = 'rgb(235, 241, 255)';
                 background.name = 'background';
 
                 var container = two.makeGroup(background);
-
+                //Placement of the elements
                 var rows = Math.floor(two.height / 100);
                 var cols = Math.floor(two.width / 100);
                 var width = Math.round(two.height / Math.max(rows, cols));
@@ -62,7 +62,7 @@
                         var hi = k / (cols - 1);
 
                         var color = colors[Math.floor(Math.random() * colors.length)];
-
+                        //Properties of elements
                         var shape;
                         if (j % 2 === 1) {
                             shape = makeSquiggle(width, width / 3, Math.floor(Math.random() * 3) + 3, two);
@@ -86,23 +86,19 @@
                     }
 
                 }
-
+                //The size of the "visible" part
                 var cursor = two.makeCircle(0, 0, Math.min(two.height, two.width) / 7);
                 cursor.outline = two.makeCircle(0, 0, Math.min(two.height, two.width) / 7);
                 cursor.target = new Two.Vector();
-
+                //Size of the outlines
                 cursor.outline.noFill();
                 cursor.outline.stroke = 'rgba(0, 100, 255, 0.1)';
                 cursor.outline.linewidth = 22;
-
+                //Properties of the movements
                 container.mask = cursor;
                 cursor.target.set(two.width / 7, two.height / 7);
                 cursor.translation.copy(cursor.target);
-
-                var center = _.debounce(function () {
-                    cursor.target.set(two.width / 6, two.height / 7);
-                }, 1000);
-
+                //Movements of the "visible" part
                 var drag = function (e) {
                     cursor.target.set(e.clientX, e.clientY);
                     center();
@@ -127,7 +123,7 @@
                     cursor.translation.x += (cursor.target.x - cursor.translation.x) * 0.125;
                     cursor.translation.y += (cursor.target.y - cursor.translation.y) * 0.125;
                     cursor.outline.translation.copy(cursor.translation);
-
+                    //Visible or not
                     for (var k in container.children) {
                         var child = container.children[k];
                         if (child.name === 'background') {
@@ -139,7 +135,7 @@
                 });
 
             });
-
+            //Properties for the squiggles
             var makeSquiggle = function (width, height, phi, two) {
 
                 var amt = 64;
@@ -157,7 +153,7 @@
             };
         </script>
     </div>
-    <script>
+    <script>//Connecting to the analytics file
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
