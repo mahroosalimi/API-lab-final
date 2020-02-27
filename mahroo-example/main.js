@@ -94,12 +94,12 @@ for (var i = 0; i < 10; i++) {
 var orbitA = two.makeCircle(centerX, centerY, 40);
 orbitA.fill = "transparent";
 orbitA.linewidth = 6;
-orbitA.stroke = "rgba(0, 0, 0, 0.1)";
+orbitA.stroke = "rgba(0, 0, 0, 0.2)";
 
 var orbitB = two.makeCircle(centerX, centerY, 100);
 orbitB.fill = "transparent";
 orbitB.linewidth = 6;
-orbitB.stroke = "rgba(0, 0, 0, 0.1)";
+orbitB.stroke = "rgba(0, 0, 0, 0.2)";
 //Properties of the electrons
 var groupElectronA = two.makeGroup(electronArray.slice(0, 2));
 groupElectronA.translation.set(centerX, centerY);
