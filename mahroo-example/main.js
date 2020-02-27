@@ -1,8 +1,9 @@
+//Position on canvas
 var centerX = 740;
 var centerY = 380;
 
 var elem = document.getElementById("atoms");
-
+//Different elements
 var elementNames = [
   "",
   "Hydrogen",
@@ -16,13 +17,13 @@ var elementNames = [
   "Fluorine",
   "Neon"
 ];
-
+//How the names are going to appear
 var styles = {
   alignment: "center",
   size: 40,
   family: "Roboto"
 };
-
+//Controls the number of times the action can happen
 var nucleusCount = 10;
 var nucleusArray = Array();
 
@@ -34,7 +35,7 @@ function intRange(min, max) {
 }
 
 var two = new Two({ fullscreen: true }).appendTo(elem);
-
+//Properties of the protons
 var protonColor = two.makeRadialGradient(
   0,
   0,
@@ -42,7 +43,7 @@ var protonColor = two.makeRadialGradient(
   new Two.Stop(0, "red", 1),
   new Two.Stop(1, "black", 1)
 );
-
+//Properties of the neutrons
 var neutronColor = two.makeRadialGradient(
   0,
   0,
@@ -50,7 +51,7 @@ var neutronColor = two.makeRadialGradient(
   new Two.Stop(0, "blue", 1),
   new Two.Stop(1, "black", 1)
 );
-
+//Controls the flow of the actions
 for (i = 0; i < nucleusCount; i++) {
   nucleusArray.push(two.makeCircle(intRange(-10, 10), intRange(-10, 10), 8));
 }
@@ -64,7 +65,7 @@ nucleusArray.forEach(function(nucleus, index) {
   }
   nucleus.noStroke();
 });
-
+//Positions of the rings
 for (var i = 0; i < 10; i++) {
   if (i < 2) {
     var shellRadius = 40;
@@ -89,7 +90,7 @@ for (var i = 0; i < 10; i++) {
     );
   }
 }
-
+//Properties of the rings
 var orbitA = two.makeCircle(centerX, centerY, 40);
 orbitA.fill = "transparent";
 orbitA.linewidth = 6;
@@ -99,7 +100,7 @@ var orbitB = two.makeCircle(centerX, centerY, 100);
 orbitB.fill = "transparent";
 orbitB.linewidth = 6;
 orbitB.stroke = "rgba(0, 0, 0, 0.1)";
-
+//Properties of the electrons
 var groupElectronA = two.makeGroup(electronArray.slice(0, 2));
 groupElectronA.translation.set(centerX, centerY);
 groupElectronA.fill = "green";
@@ -112,7 +113,7 @@ groupElectronB.linewidth = 2;
 
 var groupNucleus = two.makeGroup(nucleusArray);
 groupNucleus.translation.set(centerX, centerY);
-
+//Speed of the rotation
 two
   .bind("update", function(frameCount) {
     groupElectronA.rotation += 0.025 * Math.PI;
@@ -132,7 +133,7 @@ electronArray.forEach(function(electron, index) {
 });
 
 visible = 0;
-
+//The event listeners
 document.addEventListener("click", function(event) {
   if (visible < nucleusArray.length) {
     nucleusArray[visible].opacity = 1;
