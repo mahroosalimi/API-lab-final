@@ -1,3 +1,4 @@
+'First ten elements of the periodic table'
 In this example the Two.js library is used to present the first ten elements of the periodic table, showing the number of the protons and electrons of each element.
 The main use of this kind of an "animation" could be for educational reasons. Visual representations of such abstract concepts could help the students learn better and faster.
 The same structure of code could be used to render a solar system.
