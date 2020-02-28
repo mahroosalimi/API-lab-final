@@ -22,6 +22,6 @@ Credits:https://code.tutsplus.com/tutorials/a-beginners-guide-to-drawing-2d-grap
 
 
 Who maintains and contributes to the project:
-Mahroo Salimi, Priscilla Silva, Liam Melin-Higgins and Shehab Solaiman.
+Mahroo Salimi, Priscilla Silva, Liam Melin-Higgins and Md Solaiman Islam.
 
 From figuring out how GitHub worked, to making commits, we all contributed in some way or another. The group has worked individually on the examples and helped each other if needed.  We all tried at least two examples each. By doing so we all got our own experience working with the library.
