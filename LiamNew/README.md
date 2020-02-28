@@ -1,0 +1,3 @@
+Puzzle piece,
+this example illustrates a puzzle piece. It listens to the position of the mouse-pointer and can be rotated 180 degrees. 
+the example is from Two.js but is extended with Three.js and Jquery.js to make the example 3-dimensional. It has shown me that the library, with extensions, can be used for advanced 3-dimensional prototyping. Liam Melin-Higgins has made changes to this code, original file can be found on https://two.js.org/examples/.
